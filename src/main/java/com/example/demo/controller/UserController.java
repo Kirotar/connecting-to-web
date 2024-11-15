@@ -24,11 +24,19 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+    @PostMapping("/update-user-details/{id}")
+    public String updateId(@PathVariable ("id") Long id, @RequestBody User user) {
+        return userService.updateUser(id, user);
+    }
+    @PostMapping("/add-user")
+    public String addUser(@RequestBody User user) {
+        return userService.addUser(user);
+    }
 
-@GetMapping("/delete-user/{id}")
-    public String deleteUserById(@PathVariable("id") long userId) {
+    //Delete mapping
+    @DeleteMapping("/delete-user/{id}")
+    public String deleteUserById(@PathVariable("id") Long userId) {
         return userService.deleteUserById(userId);
-
     }
 
     @GetMapping("/allusers")

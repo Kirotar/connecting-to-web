@@ -18,6 +18,24 @@ public class UserService {
             new User(145L, "Jane Doe", "jane.doe@example.com")
     ));
 
+    public String updateUser(Long id, User user) {
+        for (User oneUser : users) {
+            if (oneUser.getId().equals(id)) {
+                oneUser.setId(user.getId());
+                oneUser.setName(user.getName());
+                oneUser.setEmail(user.getEmail());
+                return ("User has been updated: " + oneUser.getName() + ". " + "All users in the list: " + users);
+            }
+        }
+        System.out.println("All users in the list: " + users);
+        return "User not found.";
+    }
+
+    public String addUser(User user) {
+        users.add(user);
+        return ("New user has been added: " + user.getName() + ". " + "All users in the list: " + users);
+    }
+
     public String deleteUserById(Long userId) {
         for (User user : users) {
             if (user.getId().equals(userId)) { //To use equals long needs to be non-primitive, so Long
